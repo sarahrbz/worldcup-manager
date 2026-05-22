@@ -1,5 +1,6 @@
 package com.worldcup.backend.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Selecao implements java.io.Serializable {
     private Long id;
     private String name;
     private String coach;
+    @Column(name = "`group`") // "group é uma palavra reservada no SQL, então precisamos escapar usando aspas ou colchetes"
     private String group;
     private Integer fifaRanking;
     private Integer numberOfTitles;
@@ -54,7 +56,7 @@ public class Selecao implements java.io.Serializable {
     public void setNumberOfTitles(Integer numberOfTitles) {
         this.numberOfTitles = numberOfTitles;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
