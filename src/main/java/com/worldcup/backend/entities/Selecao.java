@@ -15,9 +15,11 @@ public class Selecao implements java.io.Serializable {
     private Long id;
     private String name;
     private String coach;
-    @Column(name = "`group`") // "group é uma palavra reservada no SQL, então precisamos escapar usando aspas ou colchetes"
+    @Column(name = "team_group") // "group é uma palavra reservada no SQL, então precisamos escapar usando aspas ou colchetes"
     private String group;
+    @Column(name = "fifa_ranking")
     private Integer fifaRanking;
+    @Column(name = "number_of_titles")
     private Integer numberOfTitles;
 
     public Long getId() {
