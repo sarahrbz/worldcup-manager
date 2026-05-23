@@ -17,4 +17,7 @@ public class SelecaoService {
         return repository.findAll();
     }
     
+    public Selecao findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
