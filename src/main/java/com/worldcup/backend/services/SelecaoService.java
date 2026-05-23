@@ -30,4 +30,10 @@ public class SelecaoService {
         }
         repository.deleteById(id);
     }
+
+    public Selecao save(Selecao selecao) {
+        return repository.save(selecao);
+    }
+
+
 }
