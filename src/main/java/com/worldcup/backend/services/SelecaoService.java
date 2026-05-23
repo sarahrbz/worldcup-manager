@@ -35,5 +35,17 @@ public class SelecaoService {
         return repository.save(selecao);
     }
 
+    public void update(Selecao selecao, Long id){
+        Selecao s = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Seleção não encontrada com id: " + id));
+        s.setName(selecao.getName());
+        s.setCoach(selecao.getCoach());
+        s.setGroup(selecao.getGroup());
+        s.setFifaRanking(selecao.getFifaRanking());
+        s.setNumberOfTitles(selecao.getNumberOfTitles());
+        
+        repository.save(s);
+    }
+
 
 }
