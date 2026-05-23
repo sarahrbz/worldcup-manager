@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.worldcup.backend.entities.Selecao;
 import com.worldcup.backend.repositories.SelecaoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class SelecaoService {
     @Autowired
@@ -18,6 +20,7 @@ public class SelecaoService {
     }
     
     public Selecao findById(Long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Seleção não encontrada com id: " + id));    
     }
 }
