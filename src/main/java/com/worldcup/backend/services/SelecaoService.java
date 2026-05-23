@@ -23,4 +23,11 @@ public class SelecaoService {
         return repository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("Seleção não encontrada com id: " + id));    
     }
+
+    public void deleteById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Seleção não encontrada com id: " + id);
+        }
+        repository.deleteById(id);
+    }
 }
