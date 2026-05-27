@@ -1,1 +1,40 @@
-<p>selecao-form works!</p>
+<div class="container mt-5 d-flex justify-content-center">
+
+  <div class="card p-4 shadow-lg rounded-4 mb-4" style="width: 700px;">
+    <h2 class="mb-4 text-center fw-bold">
+      <i class="bi bi-flag-fill"></i>
+      Cadastro de Seleção
+    </h2>
+
+
+    <form>
+      <div class="mb-3">
+        <label for="inputname" class="form-label"> <i class="bi bi-flag-fill"></i>Nome da Seleção</label>
+        <input type="text" class="form-control" id="inputname" placeholder="Digite o nome da seleção">
+      </div>
+
+      <div class="mb-3">
+        <label for="inputcoach" class="form-label"> <i class="bi bi-person-fill"></i> Técnico</label>
+        <input type="text" class="form-control" id="inputcoach" placeholder="Digite o nome do técnico">
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+        <label for="inputteamgroup" class="form-label"><i class="bi bi-people-fill"></i> Grupo</label>
+        <input type="text" class="form-control" id="inputteamgroup" placeholder="Digite o Grupo da seleção">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="inputranking" class="form-label"><i class="bi bi-bar-chart-fill"></i> Ranking FIFA</label>
+        <input type="number" class="form-control" id="inputranking" placeholder="Digite o ranking FIFA">
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="inputnumberOfTitles" class="form-label"><i class="bi bi-trophy-fill"></i> Número de Títulos</label>
+        <input type="number" class="form-control" id="inputnumberOfTitles" placeholder="Digite o número de títulos">
+      </div>
+      </div>
+
+      <button type="submit" class="btn custom-btn w-100 py-2 text-white"> <i class="bi bi-plus-circle-fill"></i> Cadastrar</button>
+    </form>
+  </div>
