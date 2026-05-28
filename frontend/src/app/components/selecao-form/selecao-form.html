@@ -7,34 +7,34 @@
     </h2>
 
 
-    <form>
+    <form [formGroup]="formGroupSelecao">
       <div class="mb-3">
         <label for="inputname" class="form-label"> <i class="bi bi-flag-fill"></i>Nome da Seleção</label>
-        <input type="text" class="form-control" id="inputname" placeholder="Digite o nome da seleção">
+        <input formControlName="name" type="text" class="form-control" id="inputname" placeholder="Digite o nome da seleção">
       </div>
 
       <div class="mb-3">
         <label for="inputcoach" class="form-label"> <i class="bi bi-person-fill"></i> Técnico</label>
-        <input type="text" class="form-control" id="inputcoach" placeholder="Digite o nome do técnico">
+        <input formControlName="coach" type="text" class="form-control" id="inputcoach" placeholder="Digite o nome do técnico">
       </div>
 
       <div class="row">
         <div class="col-md-4 mb-3">
         <label for="inputteamgroup" class="form-label"><i class="bi bi-people-fill"></i> Grupo</label>
-        <input type="text" class="form-control" id="inputteamgroup" placeholder="Digite o Grupo da seleção">
+        <input formControlName="group" type="text" class="form-control" id="inputteamgroup" placeholder="Digite o Grupo da seleção">
       </div>
 
       <div class="col-md-4 mb-3">
         <label for="inputranking" class="form-label"><i class="bi bi-bar-chart-fill"></i> Ranking FIFA</label>
-        <input type="number" class="form-control" id="inputranking" placeholder="Digite o ranking FIFA">
+        <input formControlName="fifaRanking" type="number" class="form-control" id="inputranking" placeholder="Digite o ranking FIFA">
       </div>
 
       <div class="col-md-4 mb-3">
         <label for="inputnumberOfTitles" class="form-label"><i class="bi bi-trophy-fill"></i> Número de Títulos</label>
-        <input type="number" class="form-control" id="inputnumberOfTitles" placeholder="Digite o número de títulos">
+        <input formControlName="numberOfTitles" type="number" class="form-control" id="inputnumberOfTitles" placeholder="Digite o número de títulos">
       </div>
       </div>
 
-      <button type="submit" class="btn custom-btn w-100 py-2 text-white"> <i class="bi bi-plus-circle-fill"></i> Cadastrar</button>
+      <button type="submit" class="btn custom-btn w-100 py-2 text-white" (click)="save()"> <i class="bi bi-plus-circle-fill"></i> Cadastrar</button>
     </form>
   </div>
