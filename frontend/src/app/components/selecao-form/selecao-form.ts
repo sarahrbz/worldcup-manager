@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Selecao } from '../../models/selecao';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { SelecaoService } from '../../services/selecao-service';
 
 @Component({
   selector: 'app-selecao-form',
@@ -10,10 +11,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SelecaoForm {
 
-  selecoes: Selecao[] = [];
+  selecoes = signal<Selecao[]>([]);
+
   formGroupSelecao: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  isEditing: boolean = false;
+
+  constructor(private formBuilder: FormBuilder, private service: SelecaoService) {
     this.formGroupSelecao = this.formBuilder.group({
       name: [''],
       coach: [''],
@@ -23,9 +27,27 @@ export class SelecaoForm {
     });
   }
 
+
   save() {
-    this.selecoes.push(this.formGroupSelecao.value);
-    this.formGroupSelecao.reset();
+    this.service.save(this.formGroupSelecao.value).subscribe({
+      next: json => {
+
+        this.selecoes.update(selecoes => [...selecoes, json]);
+        this.formGroupSelecao.reset();
+      }
+
+    });
+
+  }
+
+  update() {
+    this.service.update(this.formGroupSelecao.value).subscribe({
+      next: json => {
+        this.selecoes.update(selecoes => selecoes.map(s => s.id === json.id ? json : s));
+        this.isEditing = false;
+        this.formGroupSelecao.reset();
+      }
+    });
   }
 
 }

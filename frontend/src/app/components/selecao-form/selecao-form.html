@@ -35,6 +35,8 @@
       </div>
       </div>
 
-      <button type="submit" class="btn custom-btn w-100 py-2 text-white" (click)="save()"> <i class="bi bi-plus-circle-fill"></i> Cadastrar</button>
+      <button *ngIf="!isEditing" type="submit" class="btn custom-btn w-100 py-2 text-white" (click)="save()"> <i class="bi bi-plus-circle-fill"></i> Cadastrar</button>
+      <button *ngIf="isEditing"   type="submit" class="btn btn-primary"  (click)="update()">Atualizar</button>
+
     </form>
   </div>
