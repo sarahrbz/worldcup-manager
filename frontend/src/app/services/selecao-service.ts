@@ -26,4 +26,8 @@ export class SelecaoService {
   update(selecao: Selecao) {
     return this.http.put<Selecao>(`${this.apiUrl}/${selecao.id}`, selecao);
   }
+
+  getById(id: number) {
+  return this.http.get<Selecao>(`${this.apiUrl}/${id}`);
+}
 }

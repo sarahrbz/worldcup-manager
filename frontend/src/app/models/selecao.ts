@@ -1,6 +1,6 @@
 export interface Selecao {
   id: number,
-  nome: string,
+  name: string,
   coach: string,
   group: string,
   fifaRanking: number,
