@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.worldcup.backend.dtos.SelecaoRequest;
+import com.worldcup.backend.dtos.SelecaoResponse;
 import com.worldcup.backend.entities.Selecao;
+import com.worldcup.backend.mappers.SelecaoMapper;
 import com.worldcup.backend.repositories.SelecaoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -15,12 +18,16 @@ public class SelecaoService {
     @Autowired
     private SelecaoRepository repository;
 
-    public List<Selecao> findAll() {
-        return repository.findAll();
+    public List<SelecaoResponse> findAll() {
+        return repository.findAll()
+            .stream()
+            .map(SelecaoMapper::toDTO)
+            .toList();
     }
     
-    public Selecao findById(Long id) {
+    public SelecaoResponse findById(Long id) {
         return repository.findById(id)
+            .map(SelecaoMapper::toDTO)
             .orElseThrow(() -> new EntityNotFoundException("Seleção não encontrada com id: " + id));    
     }
 
@@ -31,18 +38,19 @@ public class SelecaoService {
         repository.deleteById(id);
     }
 
-    public Selecao save(Selecao selecao) {
-        return repository.save(selecao);
+    public SelecaoResponse save(SelecaoRequest selecao) {
+        Selecao s = repository.save(SelecaoMapper.toEntity(selecao));
+        return SelecaoMapper.toDTO(s);
     }
 
-    public void update(Selecao selecao, Long id){
+    public void update(SelecaoRequest selecao, Long id){
         Selecao s = repository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("Seleção não encontrada com id: " + id));
-        s.setName(selecao.getName());
-        s.setCoach(selecao.getCoach());
-        s.setGroup(selecao.getGroup());
-        s.setFifaRanking(selecao.getFifaRanking());
-        s.setNumberOfTitles(selecao.getNumberOfTitles());
+        s.setName(selecao.name());
+        s.setCoach(selecao.coach());
+        s.setGroup(selecao.group());
+        s.setFifaRanking(selecao.fifaRanking());
+        s.setNumberOfTitles(selecao.numberOfTitles());
         
         repository.save(s);
     }

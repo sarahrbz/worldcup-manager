@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.worldcup.backend.entities.Selecao;
+import com.worldcup.backend.dtos.SelecaoRequest;
+import com.worldcup.backend.dtos.SelecaoResponse;
+
 import com.worldcup.backend.services.SelecaoService;
 
 @RestController
@@ -26,12 +28,12 @@ public class SelecaoController {
     private SelecaoService service;
     
     @GetMapping
-    public ResponseEntity<List<Selecao>> getAll(){
+    public ResponseEntity<List<SelecaoResponse>> getAll(){
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Selecao> getById(@PathVariable long id){
+    public ResponseEntity<SelecaoResponse> getById(@PathVariable long id){
         return ResponseEntity.ok(service.findById(id));
     }
 
@@ -42,19 +44,19 @@ public class SelecaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Selecao> save(@RequestBody Selecao selecao){
-        Selecao s = service.save(selecao);
+    public ResponseEntity<SelecaoResponse> save(@RequestBody SelecaoRequest selecao){
+        SelecaoResponse s = service.save(selecao);
 
         URI location = ServletUriComponentsBuilder
                         .fromCurrentRequest()
                         .path("/{id}")
-                        .buildAndExpand(s.getId())
+                        .buildAndExpand(s.id())
                         .toUri();
         return ResponseEntity.created(location).body(s);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody Selecao selecao, @PathVariable Long id){
+    public ResponseEntity<Void> update(@RequestBody SelecaoRequest selecao, @PathVariable Long id){
         service.update(selecao, id);
         return ResponseEntity.noContent().build();
     }
