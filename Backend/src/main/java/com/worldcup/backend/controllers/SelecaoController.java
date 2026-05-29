@@ -20,6 +20,8 @@ import com.worldcup.backend.dtos.SelecaoResponse;
 
 import com.worldcup.backend.services.SelecaoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/selecoes")
 public class SelecaoController {
@@ -44,7 +46,7 @@ public class SelecaoController {
     }
 
     @PostMapping
-    public ResponseEntity<SelecaoResponse> save(@RequestBody SelecaoRequest selecao){
+    public ResponseEntity<SelecaoResponse> save(@Valid @RequestBody SelecaoRequest selecao){
         SelecaoResponse s = service.save(selecao);
 
         URI location = ServletUriComponentsBuilder
@@ -56,7 +58,7 @@ public class SelecaoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody SelecaoRequest selecao, @PathVariable Long id){
+    public ResponseEntity<Void> update(@Valid @RequestBody SelecaoRequest selecao, @PathVariable Long id){
         service.update(selecao, id);
         return ResponseEntity.noContent().build();
     }
