@@ -8,12 +8,20 @@ import { SelecaoList } from './components/selecao-list/selecao-list';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
+import { JogadorForm } from './components/jogador-form/jogador-form';
+import { JogadorList } from './components/jogador-list/jogador-list';
+import { PartidaForm } from './components/partida-form/partida-form';
+import { PartidaList } from './components/partida-list/partida-list';
 
 @NgModule({
   declarations: [
     App,
     SelecaoForm,
-    SelecaoList
+    SelecaoList,
+    JogadorForm,
+    JogadorList,
+    PartidaForm,
+    PartidaList
   ],
   imports: [
     BrowserModule,
