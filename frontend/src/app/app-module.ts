@@ -12,6 +12,9 @@ import { JogadorForm } from './components/jogador-form/jogador-form';
 import { JogadorList } from './components/jogador-list/jogador-list';
 import { PartidaForm } from './components/partida-form/partida-form';
 import { PartidaList } from './components/partida-list/partida-list';
+import { Home } from './components/home/home';
+import { Navbar } from './components/navbar/navbar';
+import { Footer } from './components/footer/footer';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { PartidaList } from './components/partida-list/partida-list';
     JogadorForm,
     JogadorList,
     PartidaForm,
-    PartidaList
+    PartidaList,
+    Home,
+    Navbar,
+    Footer
   ],
   imports: [
     BrowserModule,
