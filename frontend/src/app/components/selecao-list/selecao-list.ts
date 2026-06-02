@@ -24,15 +24,19 @@ export class SelecaoList implements OnInit {
   }
 
   update(selecao: Selecao) {
-  this.router.navigate(['/selecao-form', selecao.id]); // Navega para o formulário de edição passando o ID da seleção
-}
+    this.router.navigate(['/selecao-form', selecao.id]); // Navega para o formulário de edição passando o ID da seleção
+  }
 
   delete(selecao: Selecao) {
     this.service.delete(selecao).subscribe({
-      next: () =>{
+      next: () => {
         this.selecoes.update(selecoes => selecoes.filter(s => s.id !== selecao.id));
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Não é possível excluir uma seleção que possui jogadores cadastrados.');
       }
-    })
+    });
   }
 
 }
