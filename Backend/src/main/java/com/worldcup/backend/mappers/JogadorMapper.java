@@ -28,6 +28,7 @@ public class JogadorMapper {
             jogador.getPosition(),
             jogador.getAge(),
             jogador.getClub(),
+            jogador.getSelecao() != null ? jogador.getSelecao().getId() : null,
             jogador.getSelecao() != null ? jogador.getSelecao().getName() : null
         );
     }

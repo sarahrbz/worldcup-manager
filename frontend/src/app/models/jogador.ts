@@ -5,5 +5,6 @@ export interface Jogador {
     age: number;
     number: number;
     club: string;
+    selecaoId: number;
     selecaoName: string;
 }

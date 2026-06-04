@@ -1,0 +1,14 @@
+.custom-btn-player{
+    background: linear-gradient(to right,#198754, #28a745);
+    border: none;
+    transition: 0.3s;
+}
+
+.custom-btn-player:hover{
+    background: linear-gradient(to right, #146c43, #218838);
+    transform: scale(1.02);
+}
+
+
+
+
