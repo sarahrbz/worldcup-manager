@@ -3,7 +3,7 @@
         <h2 class="mb-4 text-center fw-bold"><i class="bi bi-person-fill"></i> Cadastro de Jogador</h2>
 
 
-        <form>
+        <form [formGroup]="formGroupJogador">
             <div class="mb-3">
                 <label for="inputname" class="form-label"><i class="bi bi-person-fill"></i> Nome</label>
                 <input type="text" class="form-control" id="inputname" formControlName="name"
@@ -36,6 +36,9 @@
 
                 <select class="form-select" formControlName="selecaoId">
                     <option value="">Selecione</option>
+                     @for (selecao of selecoes(); track selecao.id) {
+                        <option [value]="selecao.id">{{ selecao.name }}</option>
+                     }
 
 
                 </select>
