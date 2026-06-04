@@ -36,6 +36,8 @@ export class JogadorForm implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     if(id){
+      this.isEditing = true;
+
       this.service.getById(Number(id)).subscribe({
         next: jogador => {
           this.formGroupJogador.patchValue({
@@ -59,13 +61,18 @@ export class JogadorForm implements OnInit {
     }
 
     save(){
+       console.log(this.formGroupJogador.value);
       this.service.save(this.formGroupJogador.value).subscribe(
         {
           next: json => {
             this.jogadores.update(jogadores => [...jogadores, json]);
             this.formGroupJogador.reset();
-          }
+          },
+           error: err => {
+      console.log(err);
+    }
       });
+
     }
 
     update(){

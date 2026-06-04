@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 public record JogadorRequest(
     @NotBlank(message = "O nome do jogador é obrigatório.")
-    @Size(min = 10, max = 100, message = "O nome do jogador deve conter entre 10 e 100 caracteres.")  
+    @Size(min = 5, max = 100, message = "O nome do jogador deve conter entre 5 e 100 caracteres.")  
     String name,
     @NotNull(message = "O número é obrigatório")
     @Min(value = 1, message = "O número deve ser maior que 0")
