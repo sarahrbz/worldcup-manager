@@ -19,6 +19,8 @@ import com.worldcup.backend.dtos.JogadorRequest;
 import com.worldcup.backend.dtos.JogadorResponse;
 import com.worldcup.backend.services.JogadorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/jogadores")
 public class JogadorController {
@@ -37,7 +39,7 @@ public class JogadorController {
     }
 
     @PostMapping
-    public ResponseEntity<JogadorResponse> save(@RequestBody JogadorRequest jogador){
+    public ResponseEntity<JogadorResponse> save(@Valid @RequestBody JogadorRequest jogador){
         JogadorResponse j = service.save(jogador);
 
         URI location = ServletUriComponentsBuilder
@@ -49,7 +51,7 @@ public class JogadorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody JogadorRequest jogador, @PathVariable Long id){
+    public ResponseEntity<Void> update(@Valid @RequestBody JogadorRequest jogador, @PathVariable Long id){
         service.update(jogador, id);
         return ResponseEntity.noContent().build();
     }
