@@ -1,8 +1,8 @@
 <div class="container mt-5 d-flex justify-content-center">
-  <div class="card p-4 shadow-lg rounded mb-4" style="width: 600px;">
+  <div class="card p-4 shadow-lg rounded-4 mb-4" style="width: 600px;">
     <h2 class="mb-4 text-center fw-bold"><i class="bi bi-trophy-fill"></i> Cadastro de partidas </h2>
 
-    <form>
+    <form [formGroup]="formGroupPartida">
 
       <div class="row">
         <div class="col-md-4 mb-3">
@@ -36,11 +36,11 @@
       </div>
 
           <div class="col-md-6 mb-3">
-            <label for="mandandeId" class="form-label">
+            <label for="visitanteId" class="form-label">
               <i class="bi bi-flag-fill"></i> Seleção Visitante
             </label>
 
-            <select class="form-select" formControlName="mandanteId">
+            <select class="form-select" formControlName="visitanteId">
               <option value="">Selecione</option>
               @for (selecao of selecoes(); track selecao.id){
                 <option [value]="selecao.id">{{ selecao.name }}</option>
@@ -48,31 +48,31 @@
             </select>
           </div>
       </div>
-
-      <div class="mb-2">
-        <label class="form-label fw-bold">
-          <i class="bi bi-bullseye"></i> Placar
-        </label>
+      <hr class="my-3">
+      <div class="text-center mb-3">
+        <h4 class=" fw-bold">
+          <i class="bi bi-dribbble"></i> Placar
+        </h4>
       </div>
 
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
           <label class="form-label">
-            <i class="bi bi-bullseye"></i> Gols Mandante
+             Gols Mandante
           </label>
-          <input type="number" class="form-control" formControlName="golsMandante" min="0" placeholder="Ex: 2">
+          <input type="number" class="form-control text-center" formControlName="golsMandante" min="0" placeholder="Ex: 2">
         </div>
 
       <div class="col-md-6 mb-3">
         <label class="form-label">
-          <i class="bi bi-bullseye"></i> Gols Visitante
+            Gols Visitante
         </label>
 
-        <input type="number" class="form-control" formControlName="golsVisitante" min="0" placeholder="Ex: 1">
+        <input type="number" class="form-control text-center" formControlName="golsVisitante" min="0" placeholder="Ex: 1">
       </div>
       </div>
 
-      <button *ngIf="!isEditing" type="button" class="btn custom-btn-player w-100 py-2 text-white" (click)="save()">
+      <button *ngIf="!isEditing" type="button" class="btn custom-btn w-100 py-2 text-white" (click)="save()">
         <i class="bi bi-save-fill"></i> Salvar
       </button>
 

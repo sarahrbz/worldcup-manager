@@ -1,0 +1,13 @@
+.custom-btn{
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    border: none;
+    transition: 0.3s;
+}
+
+.custom-btn:hover{
+    background: linear-gradient(to right, #16325c, #244a88);
+    transform: scale(1.02);
+}
+
+
+
