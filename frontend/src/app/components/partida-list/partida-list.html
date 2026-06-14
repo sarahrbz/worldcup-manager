@@ -1,1 +1,90 @@
-<p>partida-list works!</p>
+<div class="container mt-4">
+
+  <h2 class="text-center mb-4 text-white fw-bold">
+    <i class="bi bi-trophy-fill"></i>
+    Partidas
+  </h2>
+
+  @for (partida of partidas(); track partida.id) { <!-- Loop para exibir cada partida -->
+
+    <div class="card shadow border-0 rounded-2 mb-3">
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between mb-2">
+
+          <span>
+            <i class="bi bi-calendar-event-fill"></i>
+            {{ partida.data | date:'dd/MM/yyyy'}}
+          </span>
+
+          <span>
+            <i class="bi bi-building"></i>
+            {{ partida.estadio }}
+          </span>
+
+        </div>
+
+        <div class="text-center py-3 bg-light rounded-4">
+
+          <h4 class="fw-bold">
+
+            <span
+            [class.text-success]="partida.golsMandante > partida.golsVisitante"
+            [class.fw-bold]="partida.golsMandante > partida.golsVisitante">
+            @if(partida.golsMandante > partida.golsVisitante){
+            <i class="bi bi-trophy-fill"></i>}
+            {{ partida.mandanteName }}  </span>
+
+            <span class="badge bg-primary fs-5 px-3 py-2"
+            [class.bg-primary]="partida.golsMandante !== partida.golsVisitante"
+            [class.bg-secondary]="partida.golsMandante === partida.golsVisitante">
+              {{ partida.golsMandante }}
+              x
+              {{ partida.golsVisitante }}
+            </span>
+
+            <span
+            [class.text-success]="partida.golsVisitante > partida.golsMandante"
+            [class.fw-bold]="partida.golsVisitante > partida.golsMandante">
+            @if(partida.golsVisitante > partida.golsMandante){
+
+             <i class="bi bi-trophy-fill"></i>}
+
+            {{ partida.visitanteName }}
+
+            </span>
+
+          </h4>
+
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+
+          <button
+            class="btn btn-warning btn-sm me-2"
+            (click)="update(partida)">
+
+            <i class="bi bi-pencil-fill"></i>
+            Editar
+
+          </button>
+
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="delete(partida)">
+
+            <i class="bi bi-trash-fill"></i>
+            Excluir
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
