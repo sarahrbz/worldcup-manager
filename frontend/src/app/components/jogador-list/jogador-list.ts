@@ -12,14 +12,36 @@ import { Router } from '@angular/router';
 export class JogadorList implements OnInit {
 
   jogadores = signal<Jogador[]>([]);
+  jogadoresFiltrados = signal<Jogador[]>([]);
+  filtroSelecao = '';
 
   constructor(private jogadorService: JogadorService, private router: Router) { }
 
   ngOnInit(): void {
     this.jogadorService.getAllJogadores().subscribe({
-      next: json => this.jogadores.set(json)
+      next: json => {this.jogadores.set(json),
+      this.jogadoresFiltrados.set(json)} // Inicializa os jogadores filtrados com todos os jogadores
     });
   }
+
+  filtrarPorSelecao() {
+  if (!this.filtroSelecao) {
+    this.jogadoresFiltrados.set(this.jogadores());
+    return;
+  }
+
+  this.jogadoresFiltrados.set(
+    this.jogadores().filter(
+      j => j.selecaoName === this.filtroSelecao
+    )
+  );
+}
+
+selecoesUnicas(): string[] {
+  return [...new Set(
+    this.jogadores().map(j => j.selecaoName)
+  )];
+}
 
   update(jogador: Jogador) {
     this.router.navigate(['/jogador-form', jogador.id]); // Navega para o formulário de edição passando o ID do jogador
@@ -29,6 +51,8 @@ export class JogadorList implements OnInit {
     this.jogadorService.delete(jogador).subscribe({
       next: () => {
         this.jogadores.update(jogadores => jogadores.filter(j => j.id !== jogador.id));
+
+        this.filtrarPorSelecao();
       },
       error: (err) => {
         console.error(err);

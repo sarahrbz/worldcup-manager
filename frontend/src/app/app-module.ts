@@ -6,7 +6,7 @@ import { App } from './app';
 import { SelecaoForm } from './components/selecao-form/selecao-form';
 import { SelecaoList } from './components/selecao-list/selecao-list';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { JogadorForm } from './components/jogador-form/jogador-form';
 import { JogadorList } from './components/jogador-list/jogador-list';
@@ -33,7 +33,8 @@ import { Footer } from './components/footer/footer';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
