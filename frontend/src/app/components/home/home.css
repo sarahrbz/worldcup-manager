@@ -1,0 +1,32 @@
+body {
+  background-color: #f8f9fa;
+}
+.home-container {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: url('/images/soccer-stadium.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.card {
+  border: none;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.card:hover {
+ transform: translateY(-10px) scale(1.02);
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-clickable:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+h1 {
+  color: white;
+}

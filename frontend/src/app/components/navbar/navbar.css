@@ -1,3 +1,19 @@
 .custom-navbar {
-    background-color:  #0f3460;
+    background-color: #0f3460;
+    padding: 0.8rem 1.5rem;
+    overflow: visible;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: white !important;
+}
+
+.nav-link {
+    color: white !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important;
 }

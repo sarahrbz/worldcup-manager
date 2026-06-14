@@ -15,6 +15,8 @@ export class JogadorList implements OnInit {
   jogadoresFiltrados = signal<Jogador[]>([]);
   filtroSelecao = '';
 
+  paginaAtual = 1;
+  itensPorPagina = 10;
   constructor(private jogadorService: JogadorService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,7 +26,21 @@ export class JogadorList implements OnInit {
     });
   }
 
+  get jogadoresPaginados(): Jogador[] {
+  const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+  const fim = inicio + this.itensPorPagina;
+
+  return this.jogadoresFiltrados().slice(inicio, fim);
+}
+
+  get totalPaginas(): number {
+  return Math.ceil(
+    this.jogadoresFiltrados().length / this.itensPorPagina
+  );
+}
+
   filtrarPorSelecao() {
+  this.paginaAtual = 1;
   if (!this.filtroSelecao) {
     this.jogadoresFiltrados.set(this.jogadores());
     return;
