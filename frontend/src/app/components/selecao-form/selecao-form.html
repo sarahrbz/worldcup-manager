@@ -6,6 +6,19 @@
       Cadastro de Seleção
     </h2>
 
+    @if (mensagemSucesso()) {
+      <div class="alert alert-success">
+        <i class="bi bi-check-circle-fill"></i>
+          {{ mensagemSucesso() }}
+      </div>
+}
+
+    @if (mensagemErro()) {
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+          {{ mensagemErro() }}
+      </div>
+    }
 
     <form [formGroup]="formGroupSelecao">
       <div class="mb-3">

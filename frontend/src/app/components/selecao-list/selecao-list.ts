@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Selecao } from '../../models/selecao';
 import { SelecaoService } from '../../services/selecao-service';
 import { Router } from '@angular/router'; // implementar navegação para edição
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-selecao-list',
@@ -44,7 +45,18 @@ export class SelecaoList implements OnInit {
   }
 
   delete(selecao: Selecao) {
-    this.service.delete(selecao).subscribe({
+    Swal.fire({
+      title: 'Tem certeza ?',
+      text: `Deseja excluir a seleção ${selecao.name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }). then((result) => {
+      if(result.isConfirmed){
+        this.service.delete(selecao).subscribe({
       next: () => {
         this.selecoes.update(selecoes => selecoes.filter(s => s.id !== selecao.id));
 
@@ -54,12 +66,25 @@ export class SelecaoList implements OnInit {
         ) {
           this.paginaAtual = this.totalPaginas;
         }
+
+        Swal.fire(
+          'Excluída!',
+          'A seleção foi excluída com sucesso.',
+          'success'
+        );
       },
-      error: (err) => {
-        console.error(err);
-        alert('Não é possível excluir uma seleção que possui jogadores cadastrados.');
+      error: () => {
+        Swal.fire(
+          'Erro!',
+          'Não é possível excluir uma seleção que possui jogadores cadastrados.',
+          'error'
+        );
       }
     });
+
+      }
+    });
+
   }
 
 }

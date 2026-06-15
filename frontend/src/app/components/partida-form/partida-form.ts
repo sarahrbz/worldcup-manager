@@ -18,6 +18,9 @@ export class PartidaForm implements OnInit {
 
   isEditing: boolean = false;
 
+  mensagemErro = signal('');
+  mensagemSucesso = signal('');
+
   formGroupPartida: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private service: PartidaService, private selecaoService: SelecaoService, private route: ActivatedRoute, private router: Router){
@@ -59,33 +62,62 @@ export class PartidaForm implements OnInit {
   }
 
   save(){
-    console.log(this.formGroupPartida.value);
+    this.mensagemErro.set('');
+    this.mensagemSucesso.set('');
+
     this.service.save(this.formGroupPartida.value).subscribe(
       {
         next: json => {
           this.partidas.update(partidas => [...partidas, json]);
+
+          this.mensagemSucesso.set(
+            'Partida cadastrada com sucesso!'
+          );
           this.formGroupPartida.reset({
             golsMandante: 0,
             golsVisitante: 0
           });
         },
-        error: err => {
-          console.log('Erro completo:', err);
-          console.log('Corpo do erro:', err.error);
+        error: (err) => {
+          console.error(err);
+
+          this.mensagemErro.set(
+            'Não foi possível cadastrar a partida.'
+          );
         }
       }
     );
   }
 
   update(){
+
+    this.mensagemErro.set('');
+    this.mensagemSucesso.set('');
+
     this.service.update(this.formGroupPartida.value).subscribe({
       next: () => {
+
+        this.mensagemSucesso.set(
+        'Partida atualizada com sucesso!'
+      );
+
+      setTimeout(() => {
         this.isEditing = false;
         this.formGroupPartida.reset();
 
         this.router.navigate(['/partidas']);
+
+      }, 1000);
+      },
+
+      error: (err) => {
+        console.error(err);
+
+        this.mensagemErro.set(
+          'Não foi possível atualizar a partida.'
+        );
       }
-    })
+    });
   }
 }
 

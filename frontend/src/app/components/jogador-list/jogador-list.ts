@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Jogador } from '../../models/jogador';
 import { JogadorService } from '../../services/jogador-service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-jogador-list',
@@ -64,17 +65,45 @@ selecoesUnicas(): string[] {
   }
 
   delete(jogador: Jogador) {
-    this.jogadorService.delete(jogador).subscribe({
+    Swal.fire({
+          title: 'Tem certeza ?',
+          text: `Deseja excluir ${jogador.name}?`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#dc3545',
+          cancelButtonColor: '#6c757d',
+          confirmButtonText: 'Sim, excluir',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if(result.isConfirmed){
+            this.jogadorService.delete(jogador).subscribe({
       next: () => {
         this.jogadores.update(jogadores => jogadores.filter(j => j.id !== jogador.id));
 
         this.filtrarPorSelecao();
+
+        Swal.fire(
+                  'Excluída!',
+                  'Jogador removido com sucesso.',
+                  'success'
+                );
+
+
       },
-      error: (err) => {
-        console.error(err);
-        alert('Não foi possível excluir o jogador.');
+      error: () => {
+        Swal.fire(
+                  'Erro!',
+                  'Não foi possível excluir o jogador.',
+                  'error'
+                );
+
       }
     });
+
+          }
+        });
+
+
   }
 
 }

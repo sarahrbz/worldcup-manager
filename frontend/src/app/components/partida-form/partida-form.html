@@ -1,7 +1,19 @@
 <div class="container mt-5 d-flex justify-content-center">
   <div class="card p-4 shadow-lg rounded-4 mb-4" style="width: 600px;">
     <h2 class="mb-4 text-center fw-bold"><i class="bi bi-trophy-fill"></i> Cadastro de partidas </h2>
+    @if (mensagemSucesso()) {
+      <div class="alert alert-success">
+        <i class="bi bi-check-circle-fill"></i>
+          {{ mensagemSucesso() }}
+      </div>
+}
 
+    @if (mensagemErro()) {
+      <div class="alert alert-danger">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+          {{ mensagemErro() }}
+      </div>
+    }
     <form [formGroup]="formGroupPartida">
 
       <div class="row">

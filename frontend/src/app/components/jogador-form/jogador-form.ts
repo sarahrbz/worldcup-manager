@@ -19,6 +19,9 @@ export class JogadorForm implements OnInit {
 
   isEditing: boolean = false;
 
+  mensagemErro = signal('');
+  mensagemSucesso = signal('');
+
   formGroupJogador: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private service: JogadorService, private selecaoService: SelecaoService, private route: ActivatedRoute, private router: Router) {
@@ -61,29 +64,57 @@ export class JogadorForm implements OnInit {
     }
 
     save(){
-       console.log(this.formGroupJogador.value);
+
+      this.mensagemErro.set('');
+      this.mensagemSucesso.set('');
+
       this.service.save(this.formGroupJogador.value).subscribe(
         {
           next: json => {
             this.jogadores.update(jogadores => [...jogadores, json]);
+            this.mensagemSucesso.set(
+              'Jogador cadastrado com sucesso!'
+            );
             this.formGroupJogador.reset();
           },
            error: err => {
       console.log(err);
+
+      this.mensagemErro.set(
+        'Não foi possível cadastrar o jogador.'
+      );
     }
       });
 
     }
 
     update(){
+
+      this.mensagemErro.set('');
+      this.mensagemSucesso.set('');
+
       this.service.update(this.formGroupJogador.value).subscribe({
         next: () => {
+          this.mensagemSucesso.set(
+            'Jogador atualizado com sucesso!'
+        );
+
+        setTimeout(() => {
           this.isEditing = false;
           this.formGroupJogador.reset();
 
           this.router.navigate(['/jogadores']); // Após atualizar o jogador, redirecione para a lista de jogadores
 
-        }
+        }, 1000)
+
+        },
+        error: (err) => {
+        console.error(err);
+
+        this.mensagemErro.set(
+          'Não foi possível atualizar o jogador.'
+        );
+      }
     });
   }
 }

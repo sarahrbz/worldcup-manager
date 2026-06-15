@@ -18,6 +18,9 @@ export class SelecaoForm implements OnInit {
 
   isEditing: boolean = false;
 
+  mensagemErro = signal('');
+  mensagemSucesso = signal('');
+
   constructor(private formBuilder: FormBuilder, private service: SelecaoService, private route: ActivatedRoute, private router: Router) { // Activated Route para pegar o ID da seleção a ser editada, ele é o serviço responsável por acessar os parâmetros da rota atual
     this.formGroupSelecao = this.formBuilder.group({
       id: [null],
@@ -55,11 +58,29 @@ export class SelecaoForm implements OnInit {
   }
 
   save() {
+
+    this.mensagemErro.set('');
+    this.mensagemSucesso.set('');
+
+
     this.service.save(this.formGroupSelecao.value).subscribe({
       next: json => {
 
         this.selecoes.update(selecoes => [...selecoes, json]);
+
+        this.mensagemSucesso.set(
+        'Seleção cadastrada com sucesso!'
+        );
+
         this.formGroupSelecao.reset();
+      },
+
+      error: (err) => {
+        console.error(err);
+
+        this.mensagemErro.set(
+        'Não foi possível cadastrar a seleção.'
+        );
       }
 
     });
@@ -67,12 +88,33 @@ export class SelecaoForm implements OnInit {
   }
 
   update() {
+
+    this.mensagemErro.set('');
+    this.mensagemSucesso.set('');
+
     this.service.update(this.formGroupSelecao.value).subscribe({
       next: () => {
+
+        this.mensagemSucesso.set(
+        'Seleção atualizada com sucesso!'
+      );
+
+      setTimeout(() => {
         this.isEditing = false;
         this.formGroupSelecao.reset();
 
         this.router.navigate(['/selecoes']);
+
+      }, 1000);
+
+      },
+
+      error: (err) => {
+        console.error(err);
+
+        this.mensagemErro.set(
+          'Não foi possível atualizar a seleção.'
+        );
       }
     });
   }
