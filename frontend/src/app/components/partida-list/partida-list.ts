@@ -1,7 +1,9 @@
+
 import { Component, OnInit, signal } from '@angular/core';
 import { Partida } from '../../models/partida';
 import { PartidaService } from '../../services/partida-service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-partida-list',
@@ -41,22 +43,59 @@ export class PartidaList implements OnInit {
   }
 
   delete(partida: Partida) {
-    this.partidaService.delete(partida).subscribe({
-      next: () => {
-        this.partidas.update(partidas => partidas.filter(p => p.id !== partida.id));
+    Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Deseja excluir esta partida?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Sim, excluir',
+    cancelButtonText: 'Cancelar'
+  }). then((result) => {
 
-        if (
-          this.paginaAtual > this.totalPaginas &&
-          this.totalPaginas > 0
-        ) {
-          this.paginaAtual = this.totalPaginas;
+    if (result.isConfirmed) {
+
+      this.partidaService.delete(partida).subscribe({
+
+        next: () => {
+
+          this.partidas.update(
+            partidas => partidas.filter(
+              p => p.id !== partida.id
+            )
+          );
+
+          if (
+            this.paginaAtual > this.totalPaginas &&
+            this.totalPaginas > 0
+          ) {
+            this.paginaAtual = this.totalPaginas;
+          }
+
+          Swal.fire(
+            'Excluída!',
+            'Partida removida com sucesso.',
+            'success'
+          );
+
+        },
+
+        error: () => {
+
+          Swal.fire(
+            'Erro!',
+            'Não foi possível excluir a partida.',
+            'error'
+          );
+
         }
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Não foi possível excluir a partida.');
-      }
-    });
+
+      });
+
+    }
+
+  });
   }
 
 }
