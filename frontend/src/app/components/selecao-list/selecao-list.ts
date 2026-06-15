@@ -13,6 +13,9 @@ export class SelecaoList implements OnInit {
 
   selecoes = signal<Selecao[]>([]);
 
+  paginaAtual = 1;
+  itensPorPagina = 10;
+
   constructor(private service: SelecaoService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,6 +26,19 @@ export class SelecaoList implements OnInit {
     );
   }
 
+  get selecoesPaginadas(): Selecao[]{
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+
+    return this.selecoes().slice(inicio, fim);
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(
+      this.selecoes().length / this.itensPorPagina
+    )
+  }
+
   update(selecao: Selecao) {
     this.router.navigate(['/selecao-form', selecao.id]); // Navega para o formulário de edição passando o ID da seleção
   }
@@ -31,6 +47,13 @@ export class SelecaoList implements OnInit {
     this.service.delete(selecao).subscribe({
       next: () => {
         this.selecoes.update(selecoes => selecoes.filter(s => s.id !== selecao.id));
+
+        if (
+          this.paginaAtual > this.totalPaginas &&
+          this.totalPaginas > 0
+        ) {
+          this.paginaAtual = this.totalPaginas;
+        }
       },
       error: (err) => {
         console.error(err);

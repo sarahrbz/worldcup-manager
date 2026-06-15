@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let s of selecoes()">
+        <tr *ngFor="let s of selecoesPaginadas">
           <th scope="row">{{s.id}}</th>
           <td>{{s.name}}</td>
           <td>{{s.coach}}</td>
@@ -31,5 +31,29 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-center mt-3">
+
+  <button
+    class="btn btn-outline-primary me-2"
+    [disabled]="paginaAtual === 1"
+    (click)="paginaAtual = paginaAtual - 1">
+
+    <i class="bi bi-chevron-left"></i>
+  </button>
+
+  <span class="align-self-center">
+    Página {{ paginaAtual }} de {{ totalPaginas }}
+  </span>
+
+  <button
+    class="btn btn-outline-primary ms-2"
+    [disabled]="paginaAtual === totalPaginas"
+    (click)="paginaAtual = paginaAtual + 1">
+
+    <i class="bi bi-chevron-right"></i>
+  </button>
+
+</div>
   </div>
 </div>
