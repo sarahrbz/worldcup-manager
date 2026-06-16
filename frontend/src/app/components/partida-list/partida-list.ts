@@ -25,14 +25,14 @@ export class PartidaList implements OnInit {
     });
   }
 
-  get partidasPaginadas(): Partida[]{
+  get partidasPaginadas(): Partida[]{ // traz todas as partidas e faz a paginação do frontend usando o método slice()
     const inicio = (this.paginaAtual - 1 ) * this.itensPorPagina;
     const fim = inicio + this.itensPorPagina;
 
     return this.partidas().slice(inicio, fim);
   }
 
-  get totalPaginas(): number {
+  get totalPaginas(): number { // calcula automaticamente quantas páginas existem com base na quantidade de partidas cadastradas
     return Math.ceil(
       this.partidas().length / this.itensPorPagina
     )
@@ -66,7 +66,7 @@ export class PartidaList implements OnInit {
             )
           );
 
-          if (
+          if ( // Caso apague o ultimo item da ultima pagina, é feita essa verificação para voltar automaticamente para a ultima página válida
             this.paginaAtual > this.totalPaginas &&
             this.totalPaginas > 0
           ) {

@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class JogadorForm implements OnInit {
 
   jogadores = signal<Jogador[]>([]);
-  selecoes = signal<Selecao[]>([]);
+  selecoes = signal<Selecao[]>([]); // utilizada para preencher o select
 
   isEditing: boolean = false;
 
@@ -56,7 +56,7 @@ export class JogadorForm implements OnInit {
       });
     }
 
-    this.selecaoService.getAllSelecoes().subscribe({
+    this.selecaoService.getAllSelecoes().subscribe({ // consulta para carregar todas as seleções disponíveis no sistema
       next: selecoes => {
         this.selecoes.set(selecoes);
       }
@@ -65,7 +65,7 @@ export class JogadorForm implements OnInit {
 
     save(){
 
-      this.mensagemErro.set('');
+      this.mensagemErro.set(''); // limpa as mensagens anteriores antes de realizar uma nova operação
       this.mensagemSucesso.set('');
 
       this.service.save(this.formGroupJogador.value).subscribe(
@@ -99,7 +99,7 @@ export class JogadorForm implements OnInit {
             'Jogador atualizado com sucesso!'
         );
 
-        setTimeout(() => {
+        setTimeout(() => { // um pequeno atraso para que o usuário consiga visualizar a mensagem de sucesso antes de ser redirecionado à listagem de jogadores novamente
           this.isEditing = false;
           this.formGroupJogador.reset();
 
