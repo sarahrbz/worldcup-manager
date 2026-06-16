@@ -1,6 +1,8 @@
 # ⚽ World Cup Manager
 
-Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permitindo o cadastro e gerenciamento de Seleções, Jogadores e Partidas.
+Sistema Full Stack para gerenciamento de Seleções, Jogadores e Partidas da Copa do Mundo desenvolvido com Java, Spring Boot e Angular.
+
+---
 
 ## 📌 Funcionalidades
 
@@ -10,6 +12,8 @@ Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permiti
 * Edição de seleções
 * Exclusão de seleções
 * Listagem de seleções
+* Paginação
+* Confirmação de exclusão com SweetAlert
 
 ### 👤 Jogadores
 
@@ -18,6 +22,9 @@ Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permiti
 * Edição de jogadores
 * Exclusão de jogadores
 * Listagem de jogadores
+* Filtro por seleção
+* Paginação
+* Confirmação de exclusão com SweetAlert
 
 ### ⚽ Partidas
 
@@ -27,7 +34,16 @@ Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permiti
 * Edição de partidas
 * Exclusão de partidas
 * Listagem de partidas
+* Paginação
+* Confirmação de exclusão com SweetAlert
+* Destaque visual para a seleção vencedora
 * Validação para impedir que uma seleção jogue contra ela mesma
+
+### 🏠 Dashboard Inicial
+
+* Tela inicial personalizada
+* Cards de navegação rápida para módulos do sistema
+* Interface responsiva utilizando Bootstrap
 
 ---
 
@@ -35,7 +51,7 @@ Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permiti
 
 ### Backend
 
-* Java
+* Java 21
 * Spring Boot
 * Spring Data JPA
 * Hibernate
@@ -47,6 +63,7 @@ Sistema Full Stack desenvolvido para gerenciamento de uma Copa do Mundo, permiti
 * TypeScript
 * Bootstrap 5
 * Bootstrap Icons
+* SweetAlert2
 
 ### Banco de Dados
 
@@ -75,7 +92,8 @@ frontend
 ├── components
 ├── services
 ├── models
-└── routes
+├── app.routes.ts
+└── assets
 ```
 
 ---
@@ -86,6 +104,33 @@ frontend
 * Uma partida deve possuir uma seleção mandante e uma seleção visitante.
 * Uma seleção não pode jogar contra ela mesma.
 * Os placares devem ser números inteiros válidos.
+* Não é permitido excluir uma seleção que possua jogadores cadastrados.
+
+---
+## 📸 Screenshots do Sistema
+
+### 🏠 Tela Inicial
+<img width="1587" height="770" alt="image" src="https://github.com/user-attachments/assets/27c88049-58e9-4d80-8e10-b38feddecb77" />
+
+### 🌎 Gerenciamento de Seleções
+Cadastro, edição, exclusão e listagem de seleções participantes da Copa do Mundo.
+<img width="1600" height="774" alt="image" src="https://github.com/user-attachments/assets/62e33409-82d0-48be-8d40-ea760e76fa59" />
+
+### 👤 Gerenciamento de Jogadores
+Cadastro e gerenciamento de jogadores com filtro por seleção e paginação.
+<img width="1600" height="769" alt="image" src="https://github.com/user-attachments/assets/299fc693-89d9-44d9-8925-793a1f52949c" />
+
+### 📝 Cadastro de Jogadores
+Formulário para criação e edição de jogadores.
+<img width="1600" height="772" alt="image" src="https://github.com/user-attachments/assets/6f780472-a976-4d3f-bbed-701756f6418e" />
+
+### ⚽ Gerenciamento de Partidas
+Controle dos confrontos, estádios, datas e placares.
+<img width="1589" height="770" alt="image" src="https://github.com/user-attachments/assets/da0618af-6e7d-46a2-8389-4623a2a9091f" />
+
+### ✨ Confirmação de Exclusão
+O sistema utiliza SweetAlert2 para confirmação de exclusão de registros.
+<img width="1585" height="769" alt="image" src="https://github.com/user-attachments/assets/b662a924-aa57-4c3f-817e-efc3024561e8" />
 
 ---
 
@@ -96,7 +141,7 @@ frontend
 Clone o repositório:
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/sarahrbz/worldcup-manager.git
 ```
 
 Acesse a pasta do backend:
@@ -111,7 +156,7 @@ Execute a aplicação:
 ./mvnw spring-boot:run
 ```
 
-A API estará disponível em:
+API disponível em:
 
 ```text
 http://localhost:8080
@@ -145,7 +190,7 @@ Execute a aplicação:
 ng serve
 ```
 
-O sistema estará disponível em:
+Sistema disponível em:
 
 ```text
 http://localhost:4200
@@ -155,7 +200,7 @@ http://localhost:4200
 
 ## 📚 Conceitos Aplicados
 
-* Arquitetura em camadas
+* Arquitetura em Camadas
 * REST API
 * CRUD Completo
 * DTO Pattern
@@ -163,7 +208,12 @@ http://localhost:4200
 * Relacionamentos JPA (@ManyToOne)
 * Reactive Forms
 * Angular Signals
+* Paginação Client-Side
+* Filtros Dinâmicos
+* Componentização Angular
 * Integração Frontend ↔ Backend
+* Tratamento de Erros
+* SweetAlert2
 
 ---
 
@@ -177,17 +227,22 @@ Projeto desenvolvido para fins acadêmicos e aprendizado prático em desenvolvim
 
 ## 📌 Status do Projeto
 
-🚧 Em desenvolvimento
-
-### Concluído
+🟢 Projeto Finalizado
 
 * CRUD de Seleções
 * CRUD de Jogadores
-* Backend de Partidas
+* CRUD de Partidas
 * Integração Angular + Spring Boot
+* Paginação
+* Filtro de jogadores por seleção
+* Dashboard inicial
+* SweetAlert para confirmações
+* Melhorias visuais com Bootstrap
 
-### Em andamento
+🚀 Melhorias Futuras
 
-* Frontend de Partidas
-* Melhorias visuais
-* Validações adicionais
+* Busca por nome
+* Ordenação de registros
+* Estatísticas das seleções
+* Responsividade avançada
+* Deploy da aplicação
